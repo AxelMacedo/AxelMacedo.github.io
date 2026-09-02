@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const ctx=canvas.getContext('2d');
   const chars='アァカサタナハマヤャラワガザダバパABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const fontSize=17;
+  const speed=0.45;
   let columns=0;
   let drops=[];
 
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   };
 
   const draw=()=>{
-    ctx.fillStyle='rgba(5,7,6,0.12)';
+    ctx.fillStyle='rgba(5,7,6,0.08)';
     ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
     ctx.font=`bold ${fontSize}px 'JetBrains Mono', monospace`;
     ctx.textBaseline='top';
@@ -42,12 +43,12 @@ document.addEventListener('DOMContentLoaded',()=>{
         const trailY=y-trail*fontSize;
         if(trailY<0)continue;
         ctx.shadowBlur=3;
-        ctx.fillStyle=`rgba(101,255,138,${Math.max(0.12,0.72-trail*0.06)})`;
+        ctx.fillStyle=`rgba(101,255,138,${Math.max(0.1,0.68-trail*0.055)})`;
         ctx.fillText(chars[Math.floor(Math.random()*chars.length)],x,trailY);
       }
 
       ctx.shadowBlur=0;
-      drops[i]+=1.15;
+      drops[i]+=speed;
       if(y>window.innerHeight+fontSize*10){
         drops[i]=Math.random()*-12;
       }
