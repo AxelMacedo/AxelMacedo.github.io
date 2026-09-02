@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(!canvas)return;
   const ctx=canvas.getContext('2d');
   const chars='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const fontSize=18;
-  const speed=18; // pixels per second
+  const fontSize=20;
+  const stepDelay=140;
   let columns=0;
   let drops=[];
-  let lastTime=performance.now();
+  let lastStep=performance.now();
 
   const resize=()=>{
     const dpr=Math.min(window.devicePixelRatio||1,2);
@@ -22,39 +22,40 @@ document.addEventListener('DOMContentLoaded',()=>{
     columns=Math.ceil(window.innerWidth/fontSize);
     drops=Array.from({length:columns},()=>Math.random()*window.innerHeight/fontSize);
     ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
-    lastTime=performance.now();
+    lastStep=performance.now();
   };
 
   const draw=(time)=>{
-    const delta=Math.min((time-lastTime)/1000,0.05);
-    lastTime=time;
+    if(time-lastStep>=stepDelay){
+      lastStep=time;
 
-    ctx.fillStyle='rgba(5,7,6,0.04)';
-    ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
-    ctx.font=`bold ${fontSize}px 'JetBrains Mono', monospace`;
-    ctx.textBaseline='top';
+      ctx.fillStyle='rgba(5,7,6,0.10)';
+      ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+      ctx.font=`bold ${fontSize}px 'JetBrains Mono', monospace`;
+      ctx.textBaseline='top';
 
-    for(let i=0;i<columns;i++){
-      const x=i*fontSize;
-      const y=drops[i]*fontSize;
+      for(let i=0;i<columns;i++){
+        const x=i*fontSize;
+        const y=drops[i]*fontSize;
 
-      ctx.shadowBlur=8;
-      ctx.shadowColor='#65ff8a';
-      ctx.fillStyle='rgba(150,255,170,0.98)';
-      ctx.fillText(chars[Math.floor(Math.random()*chars.length)],x,y);
+        ctx.shadowBlur=10;
+        ctx.shadowColor='#65ff8a';
+        ctx.fillStyle='rgba(150,255,170,1)';
+        ctx.fillText(chars[Math.floor(Math.random()*chars.length)],x,y);
 
-      for(let trail=1;trail<=6;trail++){
-        const trailY=y-trail*fontSize;
-        if(trailY<0)continue;
-        ctx.shadowBlur=3;
-        ctx.fillStyle=`rgba(101,255,138,${Math.max(0.1,0.6-trail*0.08)})`;
-        ctx.fillText(chars[Math.floor(Math.random()*chars.length)],x,trailY);
-      }
+        for(let trail=1;trail<=7;trail++){
+          const trailY=y-trail*fontSize;
+          if(trailY<0)continue;
+          ctx.shadowBlur=4;
+          ctx.fillStyle=`rgba(101,255,138,${Math.max(0.08,0.55-trail*0.07)})`;
+          ctx.fillText(chars[Math.floor(Math.random()*chars.length)],x,trailY);
+        }
 
-      ctx.shadowBlur=0;
-      drops[i]+=(speed*delta)/fontSize;
-      if(y>window.innerHeight+fontSize*8){
-        drops[i]=Math.random()*-10;
+        ctx.shadowBlur=0;
+        drops[i]+=1;
+        if(y>window.innerHeight+fontSize*8){
+          drops[i]=Math.random()*-10;
+        }
       }
     }
 
