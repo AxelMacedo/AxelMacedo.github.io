@@ -14,15 +14,20 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;min-height:100%;background:#fff}
-body{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;overflow:hidden}
-.book{display:block;width:min(430px,82vw);max-height:92vh;object-fit:contain;box-shadow:0 18px 45px rgba(0,0,0,.16);transition:transform .3s ease,box-shadow .3s ease}
+body{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px}
+.main{text-align:center;display:flex;flex-direction:column;align-items:center;gap:28px}
+.book{display:block;width:min(430px,82vw);max-height:78vh;object-fit:contain;box-shadow:0 18px 45px rgba(0,0,0,.16);transition:transform .3s ease,box-shadow .3s ease}
 .book:hover{transform:translateY(-6px);box-shadow:0 25px 55px rgba(0,0,0,.2)}
-@media(max-width:600px){.book{width:min(360px,82vw);max-height:88vh}}
+.message{max-width:650px;font-size:clamp(1rem,2vw,1.25rem);line-height:1.55;color:#222}
+@media(max-width:600px){.book{width:min(360px,82vw);max-height:70vh}.main{gap:22px}.message{font-size:1rem}}
 </style>
 </head>
 <body>
+<main class="main">
 <a href="https://www.amazon.com/stores/Axel-Macedo/author/B0FRGJD6TM?ref=ap_rdr&shoppingPortalEnabled=true&ccs_id=d79bb862-32d8-4617-b9cd-96cb81b7ff47" target="_blank" rel="noopener" aria-label="Comprar Cuando Papá Bebe en Amazon">
 <img class="book" src="https://images-na.ssl-images-amazon.com/images/I/718Nm6D0WlL._SY522_.jpg" alt="Cuando Papá Bebe — Cómo afrontar la vida con un padre alcohólico, por Axel Macedo">
 </a>
+<p class="message">Un libro para que reflexiones y no pases por las mismas situaciones que yo pasé con mi padre alcohólico.</p>
+</main>
 </body>
 </html>
