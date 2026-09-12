@@ -1,1 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="#fff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Axel Macedo">
+  <rect width="256" height="256" rx="48" fill="#111"/>
+  <path d="M64 60h62c22 0 40 18 40 40v96c-10-8-23-12-40-12H64V60Z" fill="#fff"/>
+  <path d="M192 60h-34v124h34V60Z" fill="#fff"/>
+  <path d="M88 92h62M88 116h62M88 140h44" fill="none" stroke="#111" stroke-width="10" stroke-linecap="round"/>
+</svg>
